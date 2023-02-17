@@ -21,14 +21,10 @@
             app:destination="@id/ThirdFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_in_right" />
-        <argument
-            android:name="personName"
-            app:argType="string" />
-        <argument
-            android:name="personAge"
-            app:argType="integer"/>
+
 
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.passindata.SecondFragment"
@@ -38,7 +34,15 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <argument
+            android:name="personName"
+            app:argType="string" />
+        <argument
+            android:name="personAge"
+            app:argType="integer"
+            android:defaultValue="0"/>
     </fragment>
+
     <fragment
         android:id="@+id/ThirdFragment"
         android:name="com.example.passindata.ThirdFragment"
@@ -47,5 +51,12 @@
         <action
             android:id="@+id/action_thirdFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <argument
+            android:name="personName"
+            app:argType="string" />
+        <argument
+            android:name="personAge"
+            app:argType="integer"
+            android:defaultValue="0"/>
     </fragment>
 </navigation>

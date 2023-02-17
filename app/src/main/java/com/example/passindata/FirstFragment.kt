@@ -1,6 +1,7 @@
 package com.example.passindata
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.example.passindata.databinding.FragmentFirstBinding
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
+    private val logTag = "ActivityLifeCycle"
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,7 +45,24 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, null, options)
+            val name = binding.nameInput.text.trim().toString()
+            if (name.isEmpty()){
+                binding.nameInput.error = "Indtast navn"
+                return@setOnClickListener
+            }
+
+            val ageStr = binding.ageInput.text.trim().toString()
+            if (ageStr.isEmpty()){
+                binding.ageInput.error = "Indtast alder"
+                return@setOnClickListener
+            }
+            val age = ageStr.toInt()
+
+            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(name, age)
+            findNavController().navigate(action)
+
+            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, null, options)
+            Log.d(logTag, "Person info sendt")
         }
 
         binding.buttonThird.setOnClickListener{
