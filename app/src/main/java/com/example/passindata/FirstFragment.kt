@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.example.passindata.databinding.FragmentFirstBinding
@@ -21,9 +22,11 @@ class FirstFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val viewModel: PersonViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -56,12 +59,23 @@ class FirstFragment : Fragment() {
                 binding.ageInput.error = "Indtast alder"
                 return@setOnClickListener
             }
-            val age = ageStr.toInt()
 
-            val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(name, age)
-            findNavController().navigate(action)
+            val address = binding.addressInput.text.trim().toString()
+            if (address.isEmpty()){
+                binding.nameInput.error = "Indtast adresse"
+                return@setOnClickListener
+            }
 
-            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, null, options)
+            val zipCodeStr = binding.zipCodeInput.text.trim().toString()
+            if (zipCodeStr.isEmpty()){
+                binding.ageInput.error = "Indtast postnummer"
+                return@setOnClickListener
+            }
+
+            viewModel.personMutableLiveData.value = PersonCollectedData(name, ageStr.toInt(), address, zipCodeStr.toInt())
+
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+
             Log.d(logTag, "Person info sendt")
         }
 

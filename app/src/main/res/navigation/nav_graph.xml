@@ -13,14 +13,10 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_in_right" />
+            app:destination="@id/SecondFragment" />
         <action
             android:id="@+id/action_FirstFragment_to_thirdFragment"
-            app:destination="@id/ThirdFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_in_right" />
+            app:destination="@id/ThirdFragment" />
 
 
     </fragment>
@@ -39,8 +35,7 @@
             app:argType="string" />
         <argument
             android:name="personAge"
-            app:argType="integer"
-            android:defaultValue="0"/>
+            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -56,7 +51,6 @@
             app:argType="string" />
         <argument
             android:name="personAge"
-            app:argType="integer"
-            android:defaultValue="0"/>
+            app:argType="integer" />
     </fragment>
 </navigation>
